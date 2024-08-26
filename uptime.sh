@@ -6,7 +6,7 @@ echo "Is the services up and running"
 
 # Array of services to check
 services=(
-    "https://identity.testing.dagen.se/health"
+    "https://banger.saas.com/api/healthz"
     # Add more services here as needed
 )
 
