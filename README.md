@@ -6,15 +6,26 @@ Note: This is as basic as it gets
 
 ## Features
 
-- Checks multiple services in parallel
-- Sends Slack notifications for non-responsive services
-- Easily configurable service list
+- Checks the health of multiple services
+- Sends Slack notifications when a service goes down or comes back up
+- Runs checks in parallel for efficiency
+- Maintains service status in a JSON file to track changes
+
+## How it works
+
+1. The script iterates through the list of services.
+2. For each service, it sends a GET request and checks the HTTP status code.
+3. If a service is down (non-200 response) and was previously up, it sends a Slack notification.
+4. If a service is up (200 response) and was previously down, it sends a Slack notification.
+5. The current status of each service is stored in a JSON file (`service_status.json`).
+
 
 ## Prerequisites
 
 - Bash shell
 - `curl` command-line tool
 - Slack webhook URL
+- `jq` command-line JSON processor
 
 ## Configuration
 
@@ -32,6 +43,9 @@ Note: This is as basic as it gets
    ```
    ./uptime.sh
    ```
+
+It's recommended to set up a cron job to run this script at regular intervals.
+
 
 ## Running with Cron
 
@@ -59,4 +73,4 @@ The script will now run automatically every minute.
 
 ## Note
 
-Please make sure that the Slack webhook URL is kept confidential and not shared publicly.
+Please ensure the Slack webhook URL is kept confidential and not shared publicly.
